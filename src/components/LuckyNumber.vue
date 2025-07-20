@@ -1,11 +1,11 @@
 <template>
     <div class="float-end">
         <button class="btn btn-outline-danger" @click="generateLuckyNumber()">
-            <span v-if="luckyNumberOld === 0">
-                Generate Lucky Number Old <br/>
-                Range (1 - {{ maxNumberOld }})</span>
-            <span v-else>Lucky Number Old: {{ luckyNumberOld }}<br/>
-                Click to generate new lucky number old
+            <span v-if="luckyNumber === 0">
+                Generate Lucky Number New <br/>
+                Range (1 - {{ maxNumber }})</span>
+            <span v-else>Lucky Number New: {{ luckyNumber }}<br/>
+                Click to generate new lucky number new
             </span>
         </button>
     </div>
@@ -15,15 +15,15 @@
 
     import { ref } from "vue";
 
-    let luckyNumberOld = ref(0);
+    let luckyNumber = ref(0);
 
     const props = defineProps({
-        maxNumberOld: { type: Number, default: 100},
+        maxNumber: { type: Number, default: 100},
     });
 
     function generateLuckyNumber(){
-        luckyNumberOld.value = Math.floor(Math.random() * props.maxNumberOld);
-        console.log(luckyNumberOld.value)
+        luckyNumber.value = Math.floor(Math.random() * props.maxNumber);
+        console.log(luckyNumber.value)
     }
 
 </script>

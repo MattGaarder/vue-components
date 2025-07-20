@@ -12,7 +12,10 @@
                 </button>
             </div>
             <div class="col-4">
-                <LuckyNumber :maxNumberOld="maxLuckyNumberOld"></LuckyNumber>
+                <LuckyNumberOld :maxNumberOld="maxLuckyNumberOld"></LuckyNumberOld>
+            </div>
+            <div class="col-4">
+                <LuckyNumber :maxNumber="maxLuckyNumber"></LuckyNumber>
             </div>
         </div>
         <span class="float-end small" v-if="ownername != ''">*this contact info belongs to {{ ownername }}</span>
@@ -22,6 +25,7 @@
 
 import { ref, defineProps }  from "vue";
 
+import LuckyNumberOld from "./LuckyNumberOld.vue";
 import LuckyNumber from "./LuckyNumber.vue";
 
 // const email = ref("");
@@ -33,6 +37,7 @@ const props = defineProps({
     email: {type: String, required: false, default: "~n/a~"},
     isFavourite: Boolean,
     maxLuckyNumberOld: Number,
+    maxLuckyNumber: Number,
 });
 
 const emit = defineEmits(["update-favourite"]);

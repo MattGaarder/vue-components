@@ -4,11 +4,14 @@
         <div>{{ message }}</div>  
         <div class="container">
             <div class="row text-white p-2 mb-2">
-                <div class="col-6">
+                <div class="col-4">
                     Contact Owner Name : <input v-model="ownerName" />
                 </div>
-                <div class="col-6 text-end">
+                <div class="col-4 text-end">
                     Max Lucky Number Old: <input v-model.number="maxNumberOld" />
+                </div>
+                <div class="col-4 text-end">
+                    Max Lucky Number New: <input v-model.number="maxNumber" />
                 </div>
             </div>
             <br /><br />
@@ -22,12 +25,13 @@
                         :email="contact.email"
                         :isFavourite="contact.isFavourite" 
                         :maxLuckyNumberOld="maxNumberOld"
+                        :maxLuckyNumber="maxNumber"
                         @update-favourite="contact.isFavourite = updateIsFavourite($event, contact.phone)"
                     >
                     </Contact>
                 </div>
             </div>
-            <LuckyNumber :maxNumberOld="10"></LuckyNumber>
+            <LuckyNumberOld :maxNumberOld="10"></LuckyNumberOld>
             <ButtonCounter></ButtonCounter>
             <ButtonCounter></ButtonCounter>
         </div>
@@ -39,12 +43,14 @@
     import ButtonCounter from './components/ButtonCounter.vue';
     import Contact from './components/Contact.vue';
     import AddContact from "./components/AddContact.vue";
+    import LuckyNumberOld from "./components/LuckyNumberOld.vue";
     import LuckyNumber from "./components/LuckyNumber.vue";
 
     const message = "Hello World";
     const ownerName = ref("Gaaredr");
 
     const maxNumberOld = ref(100);
+    const maxNumber = ref(100);
 
     const contacts = reactive([
         {
