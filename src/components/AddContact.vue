@@ -26,9 +26,11 @@
 
 
 <script setup>
-    import { reactive, defineEmits } from 'vue';
+    import { reactive, defineEmits, defineProps } from 'vue';
 
-    const emit = defineEmits(["add-contact"]);
+    // const emit = defineEmits(["add-contact"]);
+
+    const props = defineProps({ onAddContact: Function });
 
     const contact = reactive({
         named: "",
@@ -37,7 +39,7 @@
     });
 
     function addContact() {
-        emit("add-contact", {
+        props.onAddContact({
             named: contact.named,
             email: contact.email,
             phone: contact.phone,
@@ -47,6 +49,18 @@
         contact.email= "";
         contact.phone = "";
     };
+
+    // function addContact() {
+    //     emit("add-contact", {
+    //         named: contact.named,
+    //         email: contact.email,
+    //         phone: contact.phone,
+    //     });
+    //     console.log(contact);
+    //     contact.named= "";
+    //     contact.email= "";
+    //     contact.phone = "";
+    // };
 
     // function onAddContact(contact){
     //     contact.ownerName = ownerName.value;

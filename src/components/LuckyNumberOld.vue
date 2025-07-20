@@ -2,10 +2,9 @@
     <div class="float-end">
         <button class="btn btn-outline-danger" @click="generateLuckyNumber()">
             <span v-if="luckyNumberOld === 0">
-                Generate Lucky Number Old <br/>
+                Old Lucky Number:<br/>
                 Range (1 - {{ maxNumberOld }})</span>
-            <span v-else>Lucky Number Old: {{ luckyNumberOld }}<br/>
-                Click to generate new lucky number old
+            <span v-else>Prop-drill chain number: {{ luckyNumberOld }}<br/>
             </span>
         </button>
     </div>

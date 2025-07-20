@@ -6,16 +6,16 @@
                 <p>Email: {{ email }}</p>
                 <p>Phone: {{ phone }}</p>
             </div>
-            <div class="col-3">
+            <div class="col-2">
                 <button @click="emit('update-favourite', { isFavourite: props.isFavourite, named: props.named });" :class="[isFavourite ? 'btn btn-warning form-control' : 'btn btn-success form-control']">
                     {{ isFavourite  ? "Remove from" : "Add to"  }} favourite
                 </button>
             </div>
-            <div class="col-4">
+            <div class="col-2">
                 <LuckyNumberOld :maxNumberOld="maxLuckyNumberOld"></LuckyNumberOld>
             </div>
-            <div class="col-4">
-                <LuckyNumber :maxNumber="maxLuckyNumber"></LuckyNumber>
+            <div class="col-2">
+                <LuckyNumber></LuckyNumber>
             </div>
         </div>
         <span class="float-end small" v-if="ownername != ''">*this contact info belongs to {{ ownername }}</span>
@@ -37,7 +37,6 @@ const props = defineProps({
     email: {type: String, required: false, default: "~n/a~"},
     isFavourite: Boolean,
     maxLuckyNumberOld: Number,
-    maxLuckyNumber: Number,
 });
 
 const emit = defineEmits(["update-favourite"]);

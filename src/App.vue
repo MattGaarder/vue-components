@@ -15,7 +15,8 @@
                 </div>
             </div>
             <br /><br />
-            <AddContact @add-contact="onAddContact"></AddContact>
+            <!-- <AddContact @add-contact="onAddContact"></AddContact> -->
+             <AddContact :onAddContact="onAddContact"></AddContact>
             <div class="row">
                 <div class="col-12" v-for="contact in contacts" :key="contact.named">
                     <Contact
@@ -25,7 +26,6 @@
                         :email="contact.email"
                         :isFavourite="contact.isFavourite" 
                         :maxLuckyNumberOld="maxNumberOld"
-                        :maxLuckyNumber="maxNumber"
                         @update-favourite="contact.isFavourite = updateIsFavourite($event, contact.phone)"
                     >
                     </Contact>
@@ -46,11 +46,15 @@
     import LuckyNumberOld from "./components/LuckyNumberOld.vue";
     import LuckyNumber from "./components/LuckyNumber.vue";
 
+
+
     const message = "Hello World";
     const ownerName = ref("Gaaredr");
 
     const maxNumberOld = ref(100);
     const maxNumber = ref(100);
+
+    provide("maxLuckyNumber", maxNumber);
 
     const contacts = reactive([
         {
