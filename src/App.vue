@@ -1,7 +1,7 @@
 <template>
     <div class="bg-black text pt-3" :style="{ height: '100vh' }">
         <div class="text-center text-success">ContactOPedia</div>
-        <div>{{ message }}</div>  
+        <h1>{{ message }}</h1>  
         <div class="container">
             <div class="row text-white p-2 mb-2">
                 <div class="col-4">
@@ -37,36 +37,28 @@
             <ButtonCounter></ButtonCounter>
 
         </div>
-        <div class="row col-12 p-4">
-            <button class="btn btn-primary text-white m-2" @click="newVersion=!newVersion">Toggle Component</button>
-            <button class="btn btn-primary text-white m-2" @click="newVersion=false">Lucky Number V1</button>
-            <button class="btn btn-primary text-white m-2" @click="newVersion=true">Lucky Number V2</button>
-            <br />
-            <keep-alive include="['LuckyNumberV2', 'LuckyNumberV1']"> 
-                <component :is="currentComponent" />
-            </keep-alive>
-        </div>
+        <LuckyNumberParentComponent>
+            <p class="pt-2">We have two versions for picking lucky numbers</p>
+            <template v-slot:moreInfo>
+                <p>Click the button to toggle between the two versions</p>
+            </template>
+            <hr />
+            <template v-slot:learnSlot>
+                <button @click="showMessage">What will we learn?</button>
+                <h4 class="text-success">{{ learnMessage }}</h4>
+            </template>
+        </LuckyNumberParentComponent>
     </div>
 
 </template>
 
 <script setup>
-    import { reactive, ref, provide, computed } from "vue";
+    import { reactive, ref, provide, computed, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from "vue";
     import ButtonCounter from './components/ButtonCounter.vue';
     import Contact from './components/Contact.vue';
     import AddContact from "./components/AddContact.vue";
     import LuckyNumberOld from "./components/LuckyNumberOld.vue";
-
-    import LuckyNumberV2 from "./components/LuckyNumberV2.vue";
-    import LuckyNumberV1 from "./components/LuckyNumberV1.vue";
-
-    const newVersion = ref(true);
-
-    const currentComponent = computed(() => {
-        return newVersion.value ? LuckyNumberV2 : LuckyNumberV1;
-    });
-
-
+    import LuckyNumberParentComponent from "./components/LuckyNumberParentComponent.vue";
 
     const message = "Hello World";
     const ownerName = ref("Gaaredr");
@@ -115,6 +107,36 @@
         console.log(oldValuesFromChildComponent); // will also log name as well as favourite boolean from child component  
         return !oldValuesFromChildComponent.isFavourite;
     };
+
+    const learnMessage = ref("");
+
+    function showMessage(){
+        learnMessage.value = "We will learn how to use slots";
+    }
+
+    onBeforeMount(() => {
+        console.log("onBeforeMount - App.vue")
+    });
+
+    onMounted(() => {
+        console.log("onMounted - App.vue")
+    });
+
+    onBeforeUpdate(() => {
+        console.log("onBeforeUpdate - App.vue")
+    });
+
+    onUpdated(() => {
+        console.log("onUpdated - App.vue")
+    });
+
+    onBeforeUnmount(() => {
+        console.log("onBeforeUnmount - App.vue")
+    });
+
+    onUnmounted(() => {
+        console.log("onUnmounted - App.vue")
+    });
 </script>
 
 <!-- <style>
