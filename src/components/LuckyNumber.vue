@@ -19,7 +19,7 @@
     const maxNumber = inject("maxLuckyNumber");
 
     function generateLuckyNumber(){
-        luckyNumber.value = Math.floor(Math.random() * props.maxNumber);
+        luckyNumber.value = Math.floor(Math.random() * maxNumber.value);
         console.log(luckyNumber.value)
     }
 

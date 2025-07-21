@@ -31,20 +31,40 @@
                     </Contact>
                 </div>
             </div>
+
             <LuckyNumberOld :maxNumberOld="10"></LuckyNumberOld>
             <ButtonCounter></ButtonCounter>
             <ButtonCounter></ButtonCounter>
+
+        </div>
+        <div class="row col-12 p-4">
+            <button class="btn btn-primary text-white m-2" @click="newVersion=!newVersion">Toggle Component</button>
+            <button class="btn btn-primary text-white m-2" @click="newVersion=false">Lucky Number V1</button>
+            <button class="btn btn-primary text-white m-2" @click="newVersion=true">Lucky Number V2</button>
+            <br />
+            <keep-alive include="['LuckyNumberV2', 'LuckyNumberV1']"> 
+                <component :is="currentComponent" />
+            </keep-alive>
         </div>
     </div>
+
 </template>
 
 <script setup>
-    import { reactive, ref, provide } from "vue";
+    import { reactive, ref, provide, computed } from "vue";
     import ButtonCounter from './components/ButtonCounter.vue';
     import Contact from './components/Contact.vue';
     import AddContact from "./components/AddContact.vue";
     import LuckyNumberOld from "./components/LuckyNumberOld.vue";
-    import LuckyNumber from "./components/LuckyNumber.vue";
+
+    import LuckyNumberV2 from "./components/LuckyNumberV2.vue";
+    import LuckyNumberV1 from "./components/LuckyNumberV1.vue";
+
+    const newVersion = ref(true);
+
+    const currentComponent = computed(() => {
+        return newVersion.value ? LuckyNumberV2 : LuckyNumberV1;
+    });
 
 
 
